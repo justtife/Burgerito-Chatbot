@@ -7,7 +7,6 @@ import { createServer } from "http";
 const app = express();
 const httpServer = createServer(app);
 const PORT = process.env.PORT || 4300;
-import { version } from "../package.json";
 
 //Security Middlewares
 import helmet from "helmet";
@@ -172,7 +171,7 @@ app.use(log);
 const start = async () => {
   //Start Server
   const server = httpServer.listen(PORT, () => {
-    prodLogger.info(`Server ${version} is listening on port ${PORT}`);
+    prodLogger.info(`Server is listening on port ${PORT}`);
   });
   //Server Error
   server.on("error", (error: Error) => {
