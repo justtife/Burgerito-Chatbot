@@ -181,35 +181,35 @@ export default class OrderHandler {
     let order = this.orderHistory.find((order) => order.orderCode === orderNum);
     // update the status
     if (order?.orderStatus === "preparing") {
-      setTimeout(() => {
-        io.emit("infoMessage", {
-          message: `Order ${orderNum} is preparing`,
-        });
-      }, 3000);
+      // setTimeout(() => {
+      //   io.emit("infoMessage", {
+      //     message: `Order ${orderNum} is preparing`,
+      //   });
+      // }, 3000);
       setTimeout(() => {
         order!.orderStatus = "ready for delivery";
-        io.emit("infoMessage", {
-          message: `Order ${orderNum} ready for delivery`,
-          option: [],
-        });
+        // io.emit("infoMessage", {
+        //   message: `Order ${orderNum} ready for delivery`,
+        //   option: [],
+        // });
         this.updateOrderStatus(orderNum);
       }, 60000);
     } else if (order?.orderStatus === "ready for delivery") {
       setTimeout(() => {
         order!.orderStatus = "On its way";
-        io.emit("infoMessage", {
-          message: `Order ${orderNum} is on its way`,
-          option: [],
-        });
+        // io.emit("infoMessage", {
+        //   message: `Order ${orderNum} is on its way`,
+        //   option: [],
+        // });
         this.updateOrderStatus(orderNum);
       }, 60000);
     } else if (order!.orderStatus === "On its way") {
       setTimeout(() => {
         order!.orderStatus = "delivered";
-        io.emit("infoMessage", {
-          message: `Order ${orderNum} has been delivered. Thank you for you patronage`,
-          option: [],
-        });
+        // io.emit("infoMessage", {
+        //   message: `Order ${orderNum} has been delivered. Thank you for you patronage`,
+        //   option: [],
+        // });
       }, 60000);
     }
   }
