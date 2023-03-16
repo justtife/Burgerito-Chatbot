@@ -1,4 +1,5 @@
-import { io } from "..";
+import { EventEmitter } from "events";
+const infoEmitter = new EventEmitter();
 interface Item {
   name: string;
   price: number;
@@ -23,7 +24,6 @@ interface OrderOptions {
     | "cancelled";
   price: number;
 }
-let processTime: number = 60;
 export default class OrderHandler {
   private introOptions: Option[] = [
     { optionNumber: 1, optionMessage: "Place an order" },
@@ -181,14 +181,14 @@ export default class OrderHandler {
     let order = this.orderHistory.find((order) => order.orderCode === orderNum);
     // update the status
     if (order?.orderStatus === "preparing") {
-      // setTimeout(() => {
-      //   io.emit("infoMessage", {
-      //     message: `Order ${orderNum} is preparing`,
-      //   });
-      // }, 3000);
+      setTimeout(() => {
+        // infoEmitter.emit("message", {
+        //   message: `Order ${orderNum} is preparing`,
+        // });
+      }, 3000);
       setTimeout(() => {
         order!.orderStatus = "ready for delivery";
-        // io.emit("infoMessage", {
+        // infoEmitter.emit("message", {
         //   message: `Order ${orderNum} ready for delivery`,
         //   option: [],
         // });
@@ -197,7 +197,7 @@ export default class OrderHandler {
     } else if (order?.orderStatus === "ready for delivery") {
       setTimeout(() => {
         order!.orderStatus = "On its way";
-        // io.emit("infoMessage", {
+        // infoEmitter.emit("message", {
         //   message: `Order ${orderNum} is on its way`,
         //   option: [],
         // });
@@ -206,7 +206,7 @@ export default class OrderHandler {
     } else if (order!.orderStatus === "On its way") {
       setTimeout(() => {
         order!.orderStatus = "delivered";
-        // io.emit("infoMessage", {
+        // infoEmitter.emit("message", {
         //   message: `Order ${orderNum} has been delivered. Thank you for you patronage`,
         //   option: [],
         // });
@@ -299,3 +299,4 @@ export default class OrderHandler {
     return { message };
   }
 }
+export { infoEmitter };
