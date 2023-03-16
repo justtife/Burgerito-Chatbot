@@ -1,6 +1,12 @@
 # Burgerito-Chatbot
 A restaurant chatbot application built using socket.io, ejs, express, typescript
 ---
+## URL
+- Localhost:
+ http://localhost:4300/
+ - Online:
+ https://burgerito-chops.onrender.com
+ ---
 ## Features
 3. When a customer lands on the chatbot page, the bot should send these options to the customer:
 Select 1 to Place an order
